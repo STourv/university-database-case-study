@@ -28,5 +28,5 @@ This project demonstrates:
 
 1. Clone this repository:
 ```bash
-git clone https://github.com/YOUR_USERNAME/highline-mentor-program-database.git
+git clone https://github.com/STourv/highline-mentor-program-database.git
 
