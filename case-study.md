@@ -1,50 +1,44 @@
-STUDENT(StudentID PK, FirstName, LastName, EmailAddress(FirstName.LastName@students.hu.edu), DormName, DormRoomNumber, DormPhone)
+# Highline University Mentor Program Case Study
 
-FACULTY_ADVISER(FacultyID PK, FirstName, LastName, EmailAddress(FirstName.LastName@hu.edu), Department, OfficeBuildingName, OfficeBuildingRoomNumber, OfficePhone)
+## Background
+Highline University’s Mentor Program recruits business professionals as mentors to work with students and faculty advisers. The program also tracks alumni as potential mentors.
 
-ALUMNUS(AlumnusID PK, FirstName, LastName, EmailAddress(FirstName.LastName@somewhere.com), HomeAddress, HomeCity, HomeState, HomeZIP, Phone)
+## Entities
 
-MENTOR(MentorID PK, FirstName, LastName, EmailAddress(FirstName.LastName@companyname.com), CompanyName, CompanyAddress, CompanyCity, CompanyState, CompanyZIP, CompanyPhone)
+### STUDENT
+- Attributes: StudentID (PK), FirstName, LastName, EmailAddress, DormName, DormRoomNumber, DormPhone
 
-A 2.
+### FACULTY_ADVISER
+- Attributes: FacultyID (PK), FirstName, LastName, EmailAddress, Department, OfficeBuildingName, OfficeBuildingRoomNumber, OfficePhone
 
-Relationships and Cardinalities
-STUDENT — FACULTY_ADVISER
+### ALUMNUS
+- Attributes: AlumnusID (PK), FirstName, LastName, EmailAddress, HomeAddress, HomeCity, HomeState, HomeZIP, Phone
 
-Each STUDENT is assigned exactly one FACULTY_ADVISER (1,1)
+### MENTOR
+- Attributes: MentorID (PK), FirstName, LastName, EmailAddress, CompanyName, CompanyAddress, CompanyCity, CompanyState, CompanyZIP, CompanyPhone, FacultyID (FK), AlumnusID (FK, optional)
 
-Each FACULTY_ADVISER advises zero or many STUDENTS (0,N)
+## Relationships & Cardinalities
 
-Implemented by adding FacultyID as a foreign key in STUDENT
+1. **STUDENT — FACULTY_ADVISER**
+   - Each student is assigned exactly one adviser (1,1)
+   - Each faculty adviser advises zero or many students (0,N)
+   - Implemented with `FacultyID` as a foreign key in `STUDENT`.
 
-STUDENT — MENTOR
+2. **STUDENT — MENTOR**
+   - Each student may have zero or one mentor (0,1)
+   - Each mentor mentors zero or many students (0,N)
+   - Implemented with `MentorID` as a nullable foreign key in `STUDENT`.
 
-Each STUDENT may have zero or one MENTOR (0,1)
+3. **MENTOR — FACULTY_ADVISER**
+   - Each mentor works with exactly one faculty adviser (1,1)
+   - Each faculty adviser may work with zero or many mentors (0,N)
+   - Implemented with `FacultyID` as a foreign key in `MENTOR`.
 
-Each MENTOR mentors zero or many STUDENTS (0,N)
+4. **MENTOR — ALUMNUS**
+   - Each mentor may be an alumnus (0,1)
+   - Each alumnus may be associated with zero or one mentor (0,1)
+   - Implemented with `AlumnusID` as a nullable foreign key in `MENTOR`.
 
-Implemented by adding MentorID as a foreign key in STUDENT (nullable)
+## ER Diagram
+See `docs/relationships.png` for the Crow’s Foot E-R diagram.
 
-MENTOR — FACULTY_ADVISER
-
-Each MENTOR works with exactly one FACULTY_ADVISER (1,1)
-
-Each FACULTY_ADVISER works with zero or many MENTORS (0,N)
-
-Implemented by adding FacultyID as a foreign key in MENTOR
-
-MENTOR — ALUMNUS
-
-Each MENTOR may be an ALUMNUS (0,1)
-
-Each ALUMNUS may be associated with zero or one MENTOR (0,1)
-
-Implemented by adding AlumnusID as a foreign key in MENTOR (nullable)
-
-[STUDENT]───(1,1)───assigned_to───(0,N)───[FACULTY_ADVISER]
-
-[STUDENT]───(0,1)───assigned_to───(0,N)───[MENTOR]
-
-[MENTOR]───(1,1)───works_with───(0,N)───[FACULTY_ADVISER]
-
-[ALUMNUS]───(0,1)───may_be───(0,1)───[MENTOR]
