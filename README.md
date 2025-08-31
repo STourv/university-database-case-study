@@ -1,21 +1,32 @@
-# University Database Case Study
+# Highline University Mentor Program Database Case Study
 
-This project models a university system where students are assigned faculty advisers, mentors, and may be connected with alumni.  
+This repository contains a database design for the Highline University Mentor Program Information System (MPIS). 
 
-It demonstrates:
-- Relational modeling
-- Entity-relationship diagramming
-- Use of primary and foreign keys
-- Cardinalities between entities
+The MPIS tracks students, alumni, faculty advisers, and mentors, along with their relationships, to support mentorship activities at the university.
+
+## Purpose
+
+This project demonstrates:
+- Relational database design
+- Entity-relationship modeling (Crow's Foot notation)
+- Cardinalities and relationships
+- SQL implementation of schema
 
 ## Entities
-- STUDENT
-- FACULTY_ADVISER
-- ALUMNUS
-- MENTOR
+- **STUDENT** – Tracks students’ personal and dorm information.
+- **FACULTY_ADVISER** – Tracks advisers’ contact info and department.
+- **ALUMNUS** – Tracks alumni contact info.
+- **MENTOR** – Tracks mentor contact info and company details.
 
 ## Relationships
-- Each student is assigned exactly one faculty adviser.
-- Each student may have zero or one mentor.
-- Each mentor works with one faculty adviser.
-- A mentor may also be an alumnus.
+- Each student is assigned exactly one faculty adviser (1:N).
+- Each student may have zero or one mentor (0..1:N).
+- Each mentor works with exactly one faculty adviser (1:N).
+- A mentor may be an alumnus (0..1:0..1).
+
+## Getting Started
+
+1. Clone this repository:
+```bash
+git clone https://github.com/YOUR_USERNAME/highline-mentor-program-database.git
+
